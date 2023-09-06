@@ -1,3 +1,6 @@
+import { CarProps } from "@types"
+
+// API call to fetch Car properties
 export async function fetchCars() {
     const headers = {
         'X-RapidAPI-Key': `${process.env.NEXT_PUBLIC_CARS_BY_API_KEY}`,
@@ -28,4 +31,21 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
     const rentalRatePerDay = basePricePerDay + mileageRate + ageRate;
 
     return rentalRatePerDay.toFixed(0);
-};
+}
+
+// API Call to generate car images from
+// https://www.imagin.studio/car-image-api
+export const generateCarImageUrl = (car: CarProps, angle?: string) => {
+    const url = new URL('https://cdn.imagin.studio/getimage')
+
+    const { make, year, model } = car
+
+    url.searchParams.append('customer', 'hrjavascript-mastery')
+    url.searchParams.append('make', make)
+    url.searchParams.append('modelFamily', model.split(' ')[0])
+    url.searchParams.append('zoomType', 'fullscreen')
+    url.searchParams.append('modelYear', `${year}`)
+    url.searchParams.append('angle', `${angle}`)
+
+    return `${url}`
+}
