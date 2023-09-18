@@ -55,3 +55,12 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
 
     return `${url}`
 }
+
+// update search params when user changes filter field
+export const updateSearchParams = (type: string, value: string) => {
+    const searchParams = new URLSearchParams(window.location.search)
+    searchParams.set(type, value)
+    const newPathname = `${window.location.pathname}?${searchParams.toString()}`
+
+    return newPathname
+}

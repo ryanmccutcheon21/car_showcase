@@ -1,4 +1,5 @@
 import { Hero, CustomFilter, SearchBar, CarCard } from "@components"
+import { fuels, yearsOfProduction } from "@constants"
 import { HomeProps } from "@types"
 import { fetchCars } from "@utils"
 
@@ -29,8 +30,8 @@ export default async function Home({ searchParams }: HomeProps) {
         <div className="home__filters">
           <SearchBar />
           <div className="home__filter-container">
-            <CustomFilter title="fuel" />
-            <CustomFilter title="year" />
+            <CustomFilter title="fuel" options={fuels} />
+            <CustomFilter title="year" options={yearsOfProduction} />
           </div>
         </div>
         {!isDataEmpty ? (
